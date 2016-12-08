@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "<%= name %>.app"
-               BlueprintName = "<%= name %>"
-               ReferencedContainer = "container:<%= name %>.xcodeproj">
+               BuildableName = "<%= name %>TV.app"
+               BlueprintName = "<%= name %>TV"
+               ReferencedContainer = "container:<%= name %>TV.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "<%= name %>Tests.xctest"
-               BlueprintName = "<%= name %>Tests"
-               ReferencedContainer = "container:<%= name %>.xcodeproj">
+               BuildableName = "<%= name %>TVTests.xctest"
+               BlueprintName = "<%= name %>TVTests"
+               ReferencedContainer = "container:<%= name %>TV.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "<%= name %>Tests.xctest"
-               BlueprintName = "<%= name %>Tests"
-               ReferencedContainer = "container:<%= name %>.xcodeproj">
+               BuildableName = "<%= name %>TVTests.xctest"
+               BlueprintName = "<%= name %>TVTests"
+               ReferencedContainer = "container:<%= name %>TV.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "<%= name %>.app"
-            BlueprintName = "<%= name %>"
-            ReferencedContainer = "container:<%= name %>.xcodeproj">
+            BuildableName = "<%= name %>TV.app"
+            BlueprintName = "<%= name %>TV"
+            ReferencedContainer = "container:<%= name %>TV.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "<%= name %>.app"
-            BlueprintName = "<%= name %>"
-            ReferencedContainer = "container:<%= name %>.xcodeproj">
+            BuildableName = "<%= name %>TV.app"
+            BlueprintName = "<%= name %>TV"
+            ReferencedContainer = "container:<%= name %>TV.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "<%= name %>.app"
-            BlueprintName = "<%= name %>"
-            ReferencedContainer = "container:<%= name %>.xcodeproj">
+            BuildableName = "<%= name %>TV.app"
+            BlueprintName = "<%= name %>TV"
+            ReferencedContainer = "container:<%= name %>TV.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -216,7 +216,7 @@ module.exports = {
   options: [{
     command: '--simulator [string]',
     description: 'Explicitly set simulator to use',
-    default: 'iPhone 6',
+    default: 'Apple TV 1080p',
   }, {
     command: '--scheme [string]',
     description: 'Explicitly set Xcode scheme to use',
