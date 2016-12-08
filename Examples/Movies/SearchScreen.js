@@ -222,7 +222,7 @@ var SearchScreen = React.createClass({
   },
 
   selectMovie: function(movie: Object) {
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === 'tvos') {
       this.props.navigator.push({
         title: movie.title,
         component: MovieScreen,

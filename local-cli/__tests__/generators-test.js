@@ -49,131 +49,30 @@ xdescribe('React Yeoman Generators', function() {
 
     it('creates files', function() {
       assert.file([
-        '.flowconfig',
         '.gitignore',
         '.watchmanconfig',
-        'index.ios.js',
-        'index.android.js'
+        'index.tvos.js'
       ]);
     });
 
-    it('replaces vars in index.ios.js', function() {
-      assert.fileContent('index.ios.js', 'var TestApp = React.createClass({');
+    it('replaces vars in index.tvos.js', function() {
+      assert.fileContent('index.tvos.js', 'var TestApp = React.createClass({');
       assert.fileContent(
-        'index.ios.js',
+        'index.tvos.js',
         'AppRegistry.registerComponent(\'TestApp\', () => TestApp);'
       );
 
-      assert.noFileContent('index.ios.js', '<%= name %>');
+      assert.noFileContent('index.tvos.js', '<%= name %>');
     });
 
-    it('replaces vars in index.android.js', function() {
-      assert.fileContent('index.android.js', 'var TestApp = React.createClass({');
-      assert.fileContent(
-        'index.android.js',
-        'AppRegistry.registerComponent(\'TestApp\', () => TestApp);'
-      );
-
-      assert.noFileContent('index.ios.js', '<%= name %>');
-    });
-
-    it('composes with ios generator', function() {
-      var stat = fs.statSync('ios');
+    it('composes with tvos generator', function() {
+      var stat = fs.statSync('tvos');
 
       expect(stat.isDirectory()).toBe(true);
     });
-
-    it('composes with android generator', function() {
-      var stat = fs.statSync('android');
-
-      expect(stat.isDirectory()).toBe(true);
-    })
   });
 
-  describe('react:android', function () {
-    var assert;
-
-    beforeEach(function (done) {
-      // A deep dependency of yeoman spams console.log with giant json objects.
-      // yeoman-generator/node_modules/
-      //   download/node_modules/
-      //     caw/node_modules/
-      //       get-proxy/node_modules/
-      //         rc/index.js
-      var log = console.log;
-      console.log = function() {};
-      assert = require('yeoman-generator').assert;
-      var helpers = require('yeoman-generator').test;
-      console.log = log;
-
-      var generated = false;
-
-      runs(function() {
-        helpers.run(path.resolve(__dirname, '..', 'generator-android'))
-          .withArguments(['TestAppAndroid'])
-          .withOptions({
-            'package': 'com.reactnative.test',
-          })
-          .on('end', function() {
-            generated = true;
-          });
-      });
-
-      waitsFor(function() {
-        jest.runAllTicks();
-        jest.runOnlyPendingTimers();
-        return generated;
-      }, "generation", 750);
-    });
-
-    it('creates files', function () {
-      assert.file([
-        path.join('android', 'build.gradle'),
-        path.join('android', 'gradle.properties'),
-        path.join('android', 'gradlew.bat'),
-        path.join('android', 'gradlew'),
-        path.join('android', 'settings.gradle'),
-        path.join('android', 'app', 'build.gradle'),
-        path.join('android', 'app', 'proguard-rules.pro'),
-        path.join('android', 'app', 'src', 'main', 'AndroidManifest.xml'),
-        path.join('android', 'app', 'src', 'main', 'java', 'com', 'reactnative', 'test', 'MainActivity.java'),
-        path.join('android', 'app', 'src', 'main', 'res', 'mipmap-hdpi', 'ic_launcher.png'),
-        path.join('android', 'app', 'src', 'main', 'res', 'mipmap-mdpi', 'ic_launcher.png'),
-        path.join('android', 'app', 'src', 'main', 'res', 'mipmap-xhdpi', 'ic_launcher.png'),
-        path.join('android', 'app', 'src', 'main', 'res', 'mipmap-xxhdpi', 'ic_launcher.png'),
-        path.join('android', 'app', 'src', 'main', 'res', 'values', 'strings.xml'),
-        path.join('android', 'app', 'src', 'main', 'res', 'values', 'styles.xml'),
-        path.join('android', 'gradle', 'wrapper', 'gradle-wrapper.jar'),
-        path.join('android', 'gradle', 'wrapper', 'gradle-wrapper.properties')
-      ]);
-    });
-
-    it('replaces variables', function() {
-      assert.fileContent(path.join('android', 'app', 'build.gradle'), 'applicationId "com.reactnative.test"');
-      assert.fileContent(
-        path.join('android', 'app', 'src', 'main', 'AndroidManifest.xml'),
-        'package="com.reactnative.test"'
-      );
-      assert.fileContent(
-        path.join('android', 'app', 'src', 'main', 'AndroidManifest.xml'),
-        'name=".MainActivity"'
-      );
-      assert.fileContent(
-        path.join('android', 'app', 'src', 'main', 'java', 'com', 'reactnative', 'test', 'MainActivity.java'),
-        'package com.reactnative.test;'
-      );
-      assert.fileContent(
-        path.join('android', 'app', 'src', 'main', 'java', 'com', 'reactnative', 'test', 'MainActivity.java'),
-        'mReactRootView.startReactApplication(mReactInstanceManager, "TestAppAndroid", null);'
-      );
-      assert.fileContent(
-        path.join('android', 'app', 'src', 'main', 'res', 'values', 'strings.xml'),
-        '<string name="app_name">TestAppAndroid</string>'
-      );
-    });
-  });
-
-  describe('react:ios', function() {
+  describe('react:tvos', function() {
     var assert;
 
     beforeEach(function() {
@@ -192,8 +91,8 @@ xdescribe('React Yeoman Generators', function() {
       var generated = false;
 
       runs(function() {
-        helpers.run(path.resolve(__dirname, '../generator-ios'))
-          .withArguments(['TestAppIOS'])
+        helpers.run(path.resolve(__dirname, '../generator-tvos'))
+          .withArguments(['TestAppTVOS'])
           .on('end', function() {
             generated = true;
           });
@@ -208,58 +107,58 @@ xdescribe('React Yeoman Generators', function() {
 
     it('creates files', function() {
       assert.file([
-        'ios/TestAppIOS/AppDelegate.h',
-        'ios/TestAppIOS/AppDelegate.m',
-        'ios/TestAppIOS/Base.lproj/LaunchScreen.xib',
-        'ios/TestAppIOS/Images.xcassets/AppIcon.appiconset/Contents.json',
-        'ios/TestAppIOS/Info.plist',
-        'ios/TestAppIOS/main.m',
-        'ios/TestAppIOS.xcodeproj/project.pbxproj',
-        'ios/TestAppIOS.xcodeproj/xcshareddata/xcschemes/TestAppIOS.xcscheme',
-        'ios/TestAppIOSTests/TestAppIOSTests.m',
-        'ios/TestAppIOSTests/Info.plist'
+        'tvos/TestAppTVOS/AppDelegate.h',
+        'tvos/TestAppTVOS/AppDelegate.m',
+        'tvos/TestAppTVOS/Base.lproj/LaunchScreen.xib',
+        'tvos/TestAppTVOS/Images.xcassets/AppIcon.appiconset/Contents.json',
+        'tvos/TestAppTVOS/Info.plist',
+        'tvos/TestAppTVOS/main.m',
+        'tvos/TestAppTVOS.xcodeproj/project.pbxproj',
+        'tvos/TestAppTVOS.xcodeproj/xcshareddata/xcschemes/TestAppTVOS.xcscheme',
+        'tvos/TestAppTVOSTests/TestAppTVOSTests.m',
+        'tvos/TestAppTVOSTests/Info.plist'
       ]);
     });
 
     it('replaces vars in AppDelegate.m', function() {
-      var appDelegate = 'ios/TestAppIOS/AppDelegate.m';
+      var appDelegate = 'tvos/TestAppTVOS/AppDelegate.m';
 
-      assert.fileContent(appDelegate, 'moduleName:@"TestAppIOS"');
+      assert.fileContent(appDelegate, 'moduleName:@"TestAppTVOS"');
       assert.noFileContent(appDelegate, '<%= name %>');
     });
 
     it('replaces vars in LaunchScreen.xib', function() {
-      var launchScreen = 'ios/TestAppIOS/Base.lproj/LaunchScreen.xib';
+      var launchScreen = 'tvos/TestAppTVOS/Base.lproj/LaunchScreen.xib';
 
-      assert.fileContent(launchScreen, 'text="TestAppIOS"');
+      assert.fileContent(launchScreen, 'text="TestAppTVOS"');
       assert.noFileContent(launchScreen, '<%= name %>');
     });
 
-    it('replaces vars in TestAppIOSTests.m', function() {
-      var tests = 'ios/TestAppIOSTests/TestAppIOSTests.m';
+    it('replaces vars in TestAppTVOSTests.m', function() {
+      var tests = 'tvos/TestAppTVOSTests/TestAppTVOSTests.m';
 
-      assert.fileContent(tests, '@interface TestAppIOSTests : XCTestCase');
-      assert.fileContent(tests, '@implementation TestAppIOSTests');
+      assert.fileContent(tests, '@interface TestAppTVOSTests : XCTestCase');
+      assert.fileContent(tests, '@implementation TestAppTVOSTests');
       assert.noFileContent(tests, '<%= name %>');
     });
 
     it('replaces vars in project.pbxproj', function() {
-      var pbxproj = 'ios/TestAppIOS.xcodeproj/project.pbxproj';
-      assert.fileContent(pbxproj, '"TestAppIOS"');
-      assert.fileContent(pbxproj, '"TestAppIOSTests"');
-      assert.fileContent(pbxproj, 'TestAppIOS.app');
-      assert.fileContent(pbxproj, 'TestAppIOSTests.xctest');
+      var pbxproj = 'tvos/TestAppTVOS.xcodeproj/project.pbxproj';
+      assert.fileContent(pbxproj, '"TestAppTVOS"');
+      assert.fileContent(pbxproj, '"TestAppTVOSTests"');
+      assert.fileContent(pbxproj, 'TestAppTVOS.app');
+      assert.fileContent(pbxproj, 'TestAppTVOSTests.xctest');
 
       assert.noFileContent(pbxproj, '<%= name %>');
     });
 
     it('replaces vars in xcscheme', function() {
-      var xcscheme = 'ios/TestAppIOS.xcodeproj/xcshareddata/xcschemes/TestAppIOS.xcscheme';
-      assert.fileContent(xcscheme, '"TestAppIOS"');
-      assert.fileContent(xcscheme, '"TestAppIOS.app"');
-      assert.fileContent(xcscheme, 'TestAppIOS.xcodeproj');
-      assert.fileContent(xcscheme, '"TestAppIOSTests.xctest"');
-      assert.fileContent(xcscheme, '"TestAppIOSTests"');
+      var xcscheme = 'tvos/TestAppTVOS.xcodeproj/xcshareddata/xcschemes/TestAppTVOS.xcscheme';
+      assert.fileContent(xcscheme, '"TestAppTVOS"');
+      assert.fileContent(xcscheme, '"TestAppTVOS.app"');
+      assert.fileContent(xcscheme, 'TestAppTVOS.xcodeproj');
+      assert.fileContent(xcscheme, '"TestAppTVOSTests.xctest"');
+      assert.fileContent(xcscheme, '"TestAppTVOSTests"');
 
       assert.noFileContent(xcscheme, '<%= name %>');
     });

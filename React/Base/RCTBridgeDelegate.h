@@ -16,7 +16,7 @@
 
 /**
  * The location of the JavaScript source file. When running from the packager
- * this should be an absolute URL, e.g. `http://localhost:8081/index.ios.bundle`.
+ * this should be an absolute URL, e.g. `http://localhost:8081/index.tvos.bundle`.
  * When running from a locally bundled JS file, this should be a `file://` url
  * pointing to a path inside the app resources, e.g. `file://.../main.jsbundle`.
  */

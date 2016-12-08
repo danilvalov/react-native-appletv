@@ -9,12 +9,11 @@
 'use strict';
 
 const SUPPORTED_PLATFORM_EXTS = new Set([
-  'android',
-  'ios',
+  'tvos',
   'web',
 ]);
 
-// Extract platform extension: index.ios.js -> ios
+// Extract platform extension: index.tvos.js -> tvos
 function getPlatformExtension(file, platforms = SUPPORTED_PLATFORM_EXTS) {
   const last = file.lastIndexOf('.');
   const secondToLast = file.lastIndexOf('.', last - 1);

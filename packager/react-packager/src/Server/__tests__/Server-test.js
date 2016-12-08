@@ -144,19 +144,19 @@ describe('processRequest', () => {
     );
   });
 
-  pit('works with .ios.js extension', () => {
+  pit('works with .tvos.js extension', () => {
     return makeRequest(
       requestHandler,
-      'index.ios.includeRequire.bundle'
+      'index.tvos.includeRequire.bundle'
     ).then(response => {
       expect(response.body).toEqual('this is the source');
       expect(Bundler.prototype.bundle).toBeCalledWith({
-        entryFile: 'index.ios.js',
+        entryFile: 'index.tvos.js',
         inlineSourceMap: false,
         minify: false,
         hot: false,
         runModule: true,
-        sourceMapUrl: 'index.ios.includeRequire.map',
+        sourceMapUrl: 'index.tvos.includeRequire.map',
         dev: true,
         appletv: false,
         platform: undefined,
@@ -173,7 +173,7 @@ describe('processRequest', () => {
   pit('passes in the platform param', function() {
     return makeRequest(
       requestHandler,
-      'index.bundle?platform=ios'
+      'index.bundle?platform=tvos'
     ).then(function(response) {
       expect(response.body).toEqual('this is the source');
       expect(Bundler.prototype.bundle).toBeCalledWith({
@@ -182,10 +182,10 @@ describe('processRequest', () => {
         minify: false,
         hot: false,
         runModule: true,
-        sourceMapUrl: 'index.map?platform=ios',
+        sourceMapUrl: 'index.map?platform=tvos',
         dev: true,
         appletv: false,
-        platform: 'ios',
+        platform: 'tvos',
         onProgress: jasmine.any(Function),
         runBeforeMainModule: ['InitializeCore'],
         unbundle: false,
@@ -387,20 +387,20 @@ describe('processRequest', () => {
     });
 
     it('should parse the platform option', () => {
-      const req = {url: '/assets/imgs/a.png?platform=ios'};
+      const req = {url: '/assets/imgs/a.png?platform=tvos'};
       const res = {end: jest.fn(), setHeader: jest.fn()};
 
       AssetServer.prototype.get.mockImpl(() => Promise.resolve('i am image'));
 
       server.processRequest(req, res);
       jest.runAllTimers();
-      expect(AssetServer.prototype.get).toBeCalledWith('imgs/a.png', 'ios');
+      expect(AssetServer.prototype.get).toBeCalledWith('imgs/a.png', 'tvos');
       expect(res.setHeader).toBeCalledWith('Cache-Control', 'max-age=31536000');
       expect(res.end).toBeCalledWith('i am image');
     });
 
     it('should serve range request', () => {
-      const req = {url: '/assets/imgs/a.png?platform=ios', headers: {range: 'bytes=0-3'}};
+      const req = {url: '/assets/imgs/a.png?platform=tvos', headers: {range: 'bytes=0-3'}};
       const res = {end: jest.fn(), writeHead: jest.fn(), setHeader: jest.fn()};
       const mockData = 'i am image';
 
@@ -408,7 +408,7 @@ describe('processRequest', () => {
 
       server.processRequest(req, res);
       jest.runAllTimers();
-      expect(AssetServer.prototype.get).toBeCalledWith('imgs/a.png', 'ios');
+      expect(AssetServer.prototype.get).toBeCalledWith('imgs/a.png', 'tvos');
       expect(res.setHeader).toBeCalledWith('Cache-Control', 'max-age=31536000');
       expect(res.end).toBeCalledWith(mockData.slice(0, 4));
     });
@@ -481,7 +481,7 @@ describe('processRequest', () => {
   describe('/symbolicate endpoint', () => {
     pit('should symbolicate given stack trace', () => {
       const body = JSON.stringify({stack: [{
-        file: 'http://foo.bundle?platform=ios',
+        file: 'http://foo.bundle?platform=tvos',
         lineNumber: 2100,
         column: 44,
         customPropShouldBeLeftUnchanged: 'foo',
