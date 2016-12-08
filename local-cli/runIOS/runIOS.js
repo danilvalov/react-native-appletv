@@ -93,7 +93,7 @@ function runOnSimulator(xcodeProject, args, inferredSchemeName, scheme){
     if (!appName) {
       appName = inferredSchemeName;
     }
-    const appPath = `build/Build/Products/Debug-iphonesimulator/${appName}.app`;
+    const appPath = `build/Build/Products/Debug-appletvsimulator/${appName}.app`;
     console.log(`Installing ${appPath}`);
     child_process.spawnSync('xcrun', ['simctl', 'install', 'booted', appPath], {stdio: 'inherit'});
 
