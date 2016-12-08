@@ -1,8 +1,5 @@
 [ignore]
 
-# We fork some components by platform.
-.*/*[.]android.js
-
 # Ignore templates with `@flow` in header
 .*/local-cli/generator.*
 
@@ -11,9 +8,6 @@
 
 # Ignore the website subdir
 <PROJECT_ROOT>/website/.*
-
-# Ignore BUCK generated dirs
-<PROJECT_ROOT>/\.buckd/
 
 # Ignore unexpected extra @providesModule
 .*/node_modules/commoner/test/source/widget/share.js

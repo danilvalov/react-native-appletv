@@ -76,31 +76,21 @@ describe('link', () => {
     });
   });
 
-  it('should register native module when android/ios projects are present', (done) => {
+  it('should register native module when tvos projects are present', (done) => {
     const registerNativeModule = sinon.stub();
-    const dependencyConfig = {android: {}, ios: {}, assets: [], commands: {}};
+    const dependencyConfig = {tvos: {}, assets: [], commands: {}};
     const config = {
-      getProjectConfig: () => ({android: {}, ios: {}, assets: []}),
+      getProjectConfig: () => ({tvos: {}, assets: []}),
       getDependencyConfig: sinon.stub().returns(dependencyConfig),
     };
 
     jest.setMock(
-      '../android/isInstalled.js',
+      '../tvos/isInstalled.js',
       sinon.stub().returns(false)
     );
 
     jest.setMock(
-      '../android/registerNativeModule.js',
-      registerNativeModule
-    );
-
-    jest.setMock(
-      '../ios/isInstalled.js',
-      sinon.stub().returns(false)
-    );
-
-    jest.setMock(
-      '../ios/registerNativeModule.js',
+      '../tvos/registerNativeModule.js',
       registerNativeModule
     );
 
@@ -114,29 +104,19 @@ describe('link', () => {
 
   it('should not register modules when they are already installed', (done) => {
     const registerNativeModule = sinon.stub();
-    const dependencyConfig = {ios: {}, android: {}, assets: [], commands: {}};
+    const dependencyConfig = {tvos: {}, assets: [], commands: {}};
     const config = {
-      getProjectConfig: () => ({ ios: {}, android: {}, assets: [] }),
+      getProjectConfig: () => ({ tvos: {}, assets: [] }),
       getDependencyConfig: sinon.stub().returns(dependencyConfig),
     };
 
     jest.setMock(
-      '../ios/isInstalled.js',
+      '../tvos/isInstalled.js',
       sinon.stub().returns(true)
     );
 
     jest.setMock(
-      '../android/isInstalled.js',
-      sinon.stub().returns(true)
-    );
-
-    jest.setMock(
-      '../ios/registerNativeModule.js',
-      registerNativeModule
-    );
-
-    jest.setMock(
-      '../android/registerNativeModule.js',
+      '../tvos/registerNativeModule.js',
       registerNativeModule
     );
 
@@ -154,19 +134,19 @@ describe('link', () => {
     const postlink = sinon.stub().yieldsAsync();
 
     jest.setMock(
-      '../ios/registerNativeModule.js',
+      '../tvos/registerNativeModule.js',
       registerNativeModule
     );
 
     jest.setMock(
-      '../ios/isInstalled.js',
+      '../tvos/isInstalled.js',
       sinon.stub().returns(false)
     );
 
     const config = {
-      getProjectConfig: () => ({ ios: {}, assets: [] }),
+      getProjectConfig: () => ({ tvos: {}, assets: [] }),
       getDependencyConfig: sinon.stub().returns({
-        ios: {}, assets: [], commands: { prelink, postlink },
+        tvos: {}, assets: [], commands: { prelink, postlink },
       }),
     };
 
@@ -186,12 +166,12 @@ describe('link', () => {
     const copyAssets = sinon.stub();
 
     jest.setMock(
-      '../ios/copyAssets.js',
+      '../tvos/copyAssets.js',
       copyAssets
     );
 
     const config = {
-      getProjectConfig: () => ({ ios: {}, assets: projectAssets }),
+      getProjectConfig: () => ({ tvos: {}, assets: projectAssets }),
       getDependencyConfig: sinon.stub().returns(dependencyConfig),
     };
 

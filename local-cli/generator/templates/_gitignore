@@ -22,12 +22,9 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
-# Android/IJ
+# IJ
 #
-*.iml
 .idea
-.gradle
-local.properties
 
 # node.js
 #
@@ -37,5 +34,3 @@ npm-debug.log
 # BUCK
 buck-out/
 \.buckd/
-android/app/libs
-android/keystores/debug.keystore

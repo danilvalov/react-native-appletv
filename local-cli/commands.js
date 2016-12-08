@@ -36,10 +36,8 @@ export type Command = {
 };
 
 const documentedCommands = [
-  require('./android/android'),
   require('./server/server'),
-  require('./runIOS/runIOS'),
-  require('./runAndroid/runAndroid'),
+  require('./runTVOS/runTVOS'),
   require('./library/library'),
   require('./bundle/bundle'),
   require('./bundle/unbundle'),
@@ -48,8 +46,7 @@ const documentedCommands = [
   require('./install/install'),
   require('./install/uninstall'),
   require('./upgrade/upgrade'),
-  require('./logAndroid/logAndroid'),
-  require('./logIOS/logIOS'),
+  require('./logTVOS/logTVOS'),
   require('./dependencies/dependencies'),
 ];
 

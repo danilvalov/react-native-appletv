@@ -1,7 +1,6 @@
 const path = require('path');
 
-const android = require('./android');
-const ios = require('./ios');
+const tvos = require('./tvos');
 const findAssets = require('./findAssets');
 const wrapCommands = require('./wrapCommands');
 
@@ -17,8 +16,7 @@ exports.getProjectConfig = function getProjectConfig() {
   const rnpm = getRNPMConfig(folder);
 
   return Object.assign({}, rnpm, {
-    ios: ios.projectConfig(folder, rnpm.ios || {}),
-    android: android.projectConfig(folder, rnpm.android || {}),
+    tvos: tvos.projectConfig(folder, rnpm.tvos || {}),
     assets: findAssets(folder, rnpm.assets),
   });
 };
@@ -35,8 +33,7 @@ exports.getDependencyConfig = function getDependencyConfig(packageName) {
   );
 
   return Object.assign({}, rnpm, {
-    ios: ios.dependencyConfig(folder, rnpm.ios || {}),
-    android: android.dependencyConfig(folder, rnpm.android || {}),
+    tvos: tvos.dependencyConfig(folder, rnpm.tvos || {}),
     assets: findAssets(folder, rnpm.assets),
     commands: wrapCommands(rnpm.commands),
     params: rnpm.params || [],

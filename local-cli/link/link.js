@@ -15,12 +15,9 @@ const chalk = require('chalk');
 
 const isEmpty = require('lodash').isEmpty;
 const promiseWaterfall = require('./promiseWaterfall');
-const registerDependencyAndroid = require('./android/registerNativeModule');
-const registerDependencyIOS = require('./ios/registerNativeModule');
-const isInstalledAndroid = require('./android/isInstalled');
-const isInstalledIOS = require('./ios/isInstalled');
-const copyAssetsAndroid = require('./android/copyAssets');
-const copyAssetsIOS = require('./ios/copyAssets');
+const registerDependencyTVOS = require('./tvos/registerNativeModule');
+const isInstalledTVOS = require('./tvos/isInstalled');
+const copyAssetsTVOS = require('./tvos/copyAssets');
 const getProjectDependencies = require('./getProjectDependencies');
 const getDependencyConfig = require('./getDependencyConfig');
 const pollParams = require('./pollParams');
@@ -32,49 +29,23 @@ log.heading = 'rnpm-link';
 const dedupeAssets = (assets) => uniq(assets, asset => path.basename(asset));
 
 
-const linkDependencyAndroid = (androidProject, dependency) => {
-  if (!androidProject || !dependency.config.android) {
-    return null;
-  }
-
-  const isInstalled = isInstalledAndroid(androidProject, dependency.name);
-
-  if (isInstalled) {
-    log.info(chalk.grey(`Android module ${dependency.name} is already linked`));
-    return null;
-  }
-
-  return pollParams(dependency.config.params).then(params => {
-    log.info(`Linking ${dependency.name} android dependency`);
-
-    registerDependencyAndroid(
-      dependency.name,
-      dependency.config.android,
-      params,
-      androidProject
-    );
-
-    log.info(`Android module ${dependency.name} has been successfully linked`);
-  });
-};
-
-const linkDependencyIOS = (iOSProject, dependency) => {
-  if (!iOSProject || !dependency.config.ios) {
+const linkDependencyTVOS = (tvOSProject, dependency) => {
+  if (!tvOSProject || !dependency.config.tvos) {
     return;
   }
 
-  const isInstalled = isInstalledIOS(iOSProject, dependency.config.ios);
+  const isInstalled = isInstalledTVOS(tvOSProject, dependency.config.tvos);
 
   if (isInstalled) {
-    log.info(chalk.grey(`iOS module ${dependency.name} is already linked`));
+    log.info(chalk.grey(`tvOS module ${dependency.name} is already linked`));
     return;
   }
 
-  log.info(`Linking ${dependency.name} ios dependency`);
+  log.info(`Linking ${dependency.name} tvos dependency`);
 
-  registerDependencyIOS(dependency.config.ios, iOSProject);
+  registerDependencyTVOS(dependency.config.tvos, tvOSProject);
 
-  log.info(`iOS module ${dependency.name} has been successfully linked`);
+  log.info(`tvOS module ${dependency.name} has been successfully linked`);
 };
 
 const linkAssets = (project, assets) => {
@@ -82,15 +53,8 @@ const linkAssets = (project, assets) => {
     return;
   }
 
-  if (project.ios) {
-    log.info('Linking assets to ios project');
-    copyAssetsIOS(assets, project.ios);
-  }
-
-  if (project.android) {
-    log.info('Linking assets to android project');
-    copyAssetsAndroid(assets, project.android.assetsPath);
-  }
+  log.info('Linking assets to tvos project');
+  copyAssetsTVOS(assets, project.tvos);
 
   log.info('Assets have been successfully linked to your project');
 };
@@ -126,8 +90,7 @@ function link(args, config) {
 
   const tasks = flatten(dependencies.map(dependency => [
     () => promisify(dependency.config.commands.prelink || commandStub),
-    () => linkDependencyAndroid(project.android, dependency),
-    () => linkDependencyIOS(project.ios, dependency),
+    () => linkDependencyTVOS(project.tvos, dependency),
     () => promisify(dependency.config.commands.postlink || commandStub),
   ]));
 

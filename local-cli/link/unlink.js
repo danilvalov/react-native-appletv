@@ -1,12 +1,9 @@
 const log = require('npmlog');
 
 const getProjectDependencies = require('./getProjectDependencies');
-const unregisterDependencyAndroid = require('./android/unregisterNativeModule');
-const unregisterDependencyIOS = require('./ios/unregisterNativeModule');
-const isInstalledAndroid = require('./android/isInstalled');
-const isInstalledIOS = require('./ios/isInstalled');
-const unlinkAssetsAndroid = require('./android/unlinkAssets');
-const unlinkAssetsIOS = require('./ios/unlinkAssets');
+const unregisterDependencyTVOS = require('./tvos/unregisterNativeModule');
+const isInstalledTVOS = require('./tvos/isInstalled');
+const unlinkAssetsTVOS = require('./tvos/unlinkAssets');
 const getDependencyConfig = require('./getDependencyConfig');
 const compact = require('lodash').compact;
 const difference = require('lodash').difference;
@@ -20,42 +17,23 @@ const promisify = require('./promisify');
 
 log.heading = 'rnpm-link';
 
-const unlinkDependencyAndroid = (androidProject, dependency, packageName) => {
-  if (!androidProject || !dependency.android) {
+const unlinkDependencyTVOS = (tvOSProject, dependency, packageName, tvOSDependencies) => {
+  if (!tvOSProject || !dependency.tvos) {
     return;
   }
 
-  const isInstalled = isInstalledAndroid(androidProject, packageName);
+  const isInstalled = isInstalledTVOS(tvOSProject, dependency.tvos);
 
   if (!isInstalled) {
-    log.info(`Android module ${packageName} is not installed`);
+    log.info(`tvOS module ${packageName} is not installed`);
     return;
   }
 
-  log.info(`Unlinking ${packageName} android dependency`);
+  log.info(`Unlinking ${packageName} tvos dependency`);
 
-  unregisterDependencyAndroid(packageName, dependency.android, androidProject);
+  unregisterDependencyTVOS(dependency.tvos, tvOSProject, tvOSDependencies);
 
-  log.info(`Android module ${packageName} has been successfully unlinked`);
-};
-
-const unlinkDependencyIOS = (iOSProject, dependency, packageName, iOSDependencies) => {
-  if (!iOSProject || !dependency.ios) {
-    return;
-  }
-
-  const isInstalled = isInstalledIOS(iOSProject, dependency.ios);
-
-  if (!isInstalled) {
-    log.info(`iOS module ${packageName} is not installed`);
-    return;
-  }
-
-  log.info(`Unlinking ${packageName} ios dependency`);
-
-  unregisterDependencyIOS(dependency.ios, iOSProject, iOSDependencies);
-
-  log.info(`iOS module ${packageName} has been successfully unlinked`);
+  log.info(`tvOS module ${packageName} has been successfully unlinked`);
 };
 
 /**
@@ -93,12 +71,11 @@ function unlink(args, config) {
   const allDependencies = getDependencyConfig(config, getProjectDependencies());
   const otherDependencies = filter(allDependencies, d => d.name !== packageName);
   const thisDependency = find(allDependencies, d => d.name === packageName);
-  const iOSDependencies = compact(otherDependencies.map(d => d.config.ios));
+  const tvOSDependencies = compact(otherDependencies.map(d => d.config.tvos));
 
   const tasks = [
     () => promisify(thisDependency.config.commands.preunlink || commandStub),
-    () => unlinkDependencyAndroid(project.android, dependency, packageName),
-    () => unlinkDependencyIOS(project.ios, dependency, packageName, iOSDependencies),
+    () => unlinkDependencyTVOS(project.tvos, dependency, packageName, tvOSDependencies),
     () => promisify(thisDependency.config.commands.postunlink || commandStub)
   ];
 
@@ -113,15 +90,8 @@ function unlink(args, config) {
         return Promise.resolve();
       }
 
-      if (project.ios) {
-        log.info('Unlinking assets from ios project');
-        unlinkAssetsIOS(assets, project.ios);
-      }
-
-      if (project.android) {
-        log.info('Unlinking assets from android project');
-        unlinkAssetsAndroid(assets, project.android.assetsPath);
-      }
+      log.info('Unlinking assets from tvos project');
+      unlinkAssetsTVOS(assets, project.tvos);
 
       log.info(
         `${packageName} assets has been successfully unlinked from your project`
