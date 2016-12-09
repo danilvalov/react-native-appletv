@@ -34,7 +34,7 @@ react-native init YourProjectName --version danilvalov/react-native-appletv
 cd YourProjectName
 react-native run-tvos
 ```
-Your project will run to Apple TV emulator.
+Your project will be started on the Apple TV emulator.
 
 ## Modifying your tvOS app:
 
