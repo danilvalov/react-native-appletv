@@ -1,103 +1,103 @@
-# React Native [![Build Status](https://travis-ci.org/facebook/react-native.svg?branch=master)](https://travis-ci.org/facebook/react-native) [![Circle CI](https://circleci.com/gh/facebook/react-native.svg?style=svg)](https://circleci.com/gh/facebook/react-native) [![npm version](https://badge.fury.io/js/react-native.svg)](https://badge.fury.io/js/react-native)
+# Getting Started
 
-React Native enables you to build world-class application experiences on native platforms using a consistent developer experience based on JavaScript and [React](https://facebook.github.io/react). The focus of React Native is on developer efficiency across all the platforms you care about - learn once, write anywhere. Facebook uses React Native in multiple production apps and will continue investing in React Native.
+## Preparation
 
-Supported operating systems are >= Android 4.1 (API 16) and >= iOS 8.0.
+### Installing Dependencies
 
-- [Getting Started](#getting-started)
-- [Getting Help](#getting-help)
-- [Documentation](#documentation)
-- [Examples](#examples)
-- [Extending React Native](#extending-react-native)
-- [Upgrading](#upgrading)
-- [Opening Issues](#opening-issues)
-- [Contributing](#contributing)
-- [License](#license)
+#### Node, Watchman
 
-## Introduction
-
-See the official [React Native website](https://facebook.github.io/react-native/) for an introduction to React Native.
-
-## Getting Started
-
-- Follow the [Getting Started guide](https://facebook.github.io/react-native/docs/getting-started.html) to install React Native and its dependencies.
-- Check out this [tutorial](https://facebook.github.io/react-native/docs/sample-application-movies.html) to walk through your first project that fetches real data and displays it in a list.
-- [Open the UIExplorer example project](#examples) to see a list of components that ship with React Native.
-- Install the React Developer Tools for [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) or [Firefox](https://addons.mozilla.org/firefox/addon/react-devtools/) for better debugging [(read more)](https://facebook.github.io/react-native/docs/debugging.html).
-- Try out apps from the [Showcase](https://facebook.github.io/react-native/showcase.html) to see what React Native is capable of!
-
-## Getting Help
-
-Please use these community resources for getting help. We use the GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them.
-
-- Ask a question on [StackOverflow](https://stackoverflow.com/) and tag it with `react-native`
-- Chat with us on [Reactiflux](https://discord.gg/0ZcbPKXt5bWJVmUY) in #react-native
-- Articulate your feature request or upvote existing ones on [Product Pains](https://productpains.com/product/react-native/)
-- Start a thread on the [React Discussion Board](https://discuss.reactjs.org/)
-- Join #reactnative on IRC: chat.freenode.net
-- If it turns out that you may have found a bug, please [open an issue](#opening-issues)
-
-## Documentation
-
-[The website’s documentation](https://facebook.github.io/react-native/docs/) is divided into multiple sections.
-- There are **Guides** that discuss topics like [debugging](https://facebook.github.io/react-native/docs/debugging.html), [integrating with existing apps](https://facebook.github.io/react-native/docs/integration-with-existing-apps.html), and [the gesture responder system](https://facebook.github.io/react-native/docs/gesture-responder-system.html).
-- The **Components** section covers React components such as [`View`](https://facebook.github.io/react-native/docs/view.html) and [`Navigator`](https://facebook.github.io/react-native/docs/navigator.html).
-- The **APIs** section covers other libraries like [Animated](https://facebook.github.io/react-native/docs/animated.html) and [StyleSheet](https://facebook.github.io/react-native/docs/stylesheet.html) that aren’t React components themselves.
-- Finally, React Native provides a small number of **Polyfills** that offer web-like APIs.
-
-Another great way to learn more about the components and APIs included with React Native is to read their source. Look under the `Libraries` directory for components like `ScrollView` and `Navigator`, for example. The UIExplorer example is also here to demonstrate some of the ways to use these components. From the source you can get an accurate understanding of each component’s behavior and API.
-
-The React Native documentation only discusses the components, APIs and topics specific to React Native (React on iOS and Android). For further documentation on the React API that is shared between React Native and React DOM, refer to the [React documentation](https://facebook.github.io/react/).
-
-## Examples
-
-- `git clone https://github.com/facebook/react-native.git`
-- `cd react-native && npm install`
-
-### Running the examples on iOS
-
-Now open any example (the `.xcodeproj` file in each of the `Examples` subdirectories) and hit Run in Xcode.
-
-### Running the examples on Android
-
-Note that you'll need the Android NDK installed, see [prerequisites](https://github.com/facebook/react-native/blob/master/ReactAndroid/README.md#prerequisites).
-
-```bash
-./gradlew :Examples:Movies:android:app:installDebug
-# Start the packager in a separate shell (make sure you ran npm install):
-./packager/packager.sh
-# Open the Movies app in your emulator
+We recommend installing Node and Watchman using [Homebrew](http://brew.sh/). Run the following commands in a Terminal after installing Homebrew:
+```$xslt
+brew install node
+brew install watchman
 ```
 
-## Extending React Native
+#### The React Native CLI
 
-- Looking for a component? [JS.coach](https://js.coach/react-native)
-- Fellow developers write and publish React Native modules to npm and open source them on GitHub.
-- Making modules helps grow the React Native ecosystem and community. We recommend writing modules for your use cases and sharing them on npm.
-- Read the guides on Native Modules ([iOS](https://facebook.github.io/react-native/docs/native-modules-ios.html), [Android](https://facebook.github.io/react-native/docs/native-modules-android.html)) and Native UI Components ([iOS](https://facebook.github.io/react-native/docs/native-components-ios.html), [Android](https://facebook.github.io/react-native/docs/native-components-android.html)) if you are interested in extending native functionality.
+```$xslt
+npm install -g react-native-cli
+```
 
-## Upgrading
+#### Xcode
 
-React Native is under active development. See the guide on [upgrading React Native](https://facebook.github.io/react-native/docs/upgrading.html) to keep your project up-to-date.
+The easiest way to install Xcode is via the [Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12). Installing Xcode will also install the iOS Simulator and all the necessary tools to build your iOS app.
 
-## Opening Issues
 
-If you encounter a bug with React Native we would like to hear about it. Search the [existing issues](https://github.com/facebook/react-native/issues) and try to make sure your problem doesn’t already exist before opening a new issue. It’s helpful if you include the version of React Native and OS you’re using. Please include a stack trace and reduced repro case when appropriate, too.
+## Setup and running
 
-The GitHub issues are intended for bug reports and feature requests. For help and questions with using React Native please make use of the resources listed in the [Getting Help](#getting-help) section. [Product Pains](https://productpains.com/product/react-native/) in particular is a good way to signal your interest in a feature or issue. There are limited resources available for handling issues and by keeping the list of open issues lean we can respond in a timely manner.
+#### Setup your tvOS project:
+```$xslt
+react-native init YourProjectName --version danilvalov/react-native-appletv
+```
+#### Run your tvOS project:
+```$xslt
+cd YourProjectName
+react-native run-tvos
+```
+Your project will run to Apple TV emulator.
 
-## Contributing
+## Modifying your tvOS app:
 
-For more information about contributing PRs and issues, see our [Contribution Guidelines](https://github.com/facebook/react-native/blob/master/CONTRIBUTING.md).
+#### Now that you have successfully run the app, let's modify it.
 
-[Good First Task](https://github.com/facebook/react-native/labels/Good%20First%20Task) is a great starting point for PRs.
+* Open `index.tvos.js` in your text editor of choice and edit some lines.
+* Hit Command⌘ + R in your tvOS Simulator to reload the app and see your change!
 
-We encourage the community to ask and answer questions on Stack Overflow with [the react-native tag](https://stackoverflow.com/questions/tagged/react-native). It's a great way to help out and be involved!
+#### That's it!
 
-## License
+Congratulations! You've successfully run and modified your first React Native app.
 
-React is [BSD licensed](./LICENSE). We also provide an additional [patent grant](./PATENTS).
+# Apple TV changes
 
-React documentation is [Creative Commons licensed](./LICENSE-docs).
+This branch includes changes to support building React Native applications on Apple TV.
 
-Examples provided in this repository and in the documentation are [separately licensed](./LICENSE-examples), as are some of the [custom components](./LICENSE-CustomComponents).
+The changes have been implemented with the intention of supporting existing React Native iOS applications so that few or no changes are required in the Javascript code for the applications.
+
+This branch includes a working version of the UIExplorer example project for Apple TV.
+
+## Build changes
+
+- *Native layer*: For convenience and ease of merging with the existing React Native repository, tvOS applications are built in separate Xcode projects from iOS applications.  Each iOS project now has a corresponding tvOS project with name ending in "TV".
+- *Javascript layer*: The packager has been modified to accept a new option, `appletv`.  If `appletv=true` is passed into the URL requested from the packager, the JS bundle will have the global `__APPLETV__` set to true.  This allows applications to expose Apple TV specific behavior, or suppress views that are not supported on Apple TV.
+
+## Code changes
+
+- *General support for tvOS*: Apple TV specific changes in native code are all wrapped by the TARGET_OS_TV define.  These include changes to suppress APIs that are not supported on tvOS (e.g. web views, sliders, switches, status bar, etc.), and changes to support user input from the TV remote or keyboard.
+- *TV remote/keyboard input*: A new native class, RCTTVRemoteHandler, sets up gesture recognizers for TV remote events.  Views now have an optional method, onTVNavEvent.  When a TV remote event occurs, the gesture recognizer walks the root view tree, calling onTVNavEvent for any view that has implemented the method.  A component can use this to detect menu button presses or arrow key/swipe gestures, as in the below code snippet from Examples/2048: 
+
+```js
+  handleTVNavEvent(evt) {
+      if(evt.nativeEvent.eventType === "left") {
+        this.setState({board: this.state.board.move(0)});
+      } else if(evt.nativeEvent.eventType === "right") {
+        this.setState({board: this.state.board.move(2)});
+      } else if(evt.nativeEvent.eventType === "up") {
+        this.setState({board: this.state.board.move(1)});
+      } else if(evt.nativeEvent.eventType === "down") {
+        this.setState({board: this.state.board.move(3)});
+      } 
+  }
+
+  render() {
+    .
+    .
+    .
+    return (
+      <View
+        style={styles.container}
+        onTVNavEvent={(event) => this.handleTVNavEvent(event)}
+        onTouchStart={(event) => this.handleTouchStart(event)}
+```
+
+- *Access to touchable controls*: The View class now has a new optional method, onTVSelect.  Code has been added to RCTView in the native layer to make any view with a non-null onTVSelect method to be focusable and navigable with the TV remote.  If the view is focused and the TV remote select button is pressed, the onTVSelect method is called.  The TouchableHighlight and TouchableOpacity components have these methods implemented such that when they are selected, the onPress method fires as expected.
+- *Styling for TV remote navigation*: A view that is focusable and navigable may implement the optional methods onTVFocus and onTVBlur to change view styling as the view goes in and out of focus during navigation with the remote.  TouchableHighlight and TouchableOpacity implement these methods to highlight touchable views as the user navigates through the app.  
+- *TV remote animations*: RCTView native code implements Apple-recommended parallax animations to help guide the eye as the user navigates through views.  The animations can be disabled or adjusted with new optional view properties tvParallaxDisable, tvParallaxShiftDistance, tvParallaxTiltAngle, tvParallaxMagnification.
+- *Back navigation with the TV remote menu button*: The NavigationExperimental and NavigatorIOS components have views with onTVNavEvent implemented to navigate back as expected.
+
+
+## Test status
+
+- *Jest tests*: All pass.
+- *iOS unit tests*: All pass.
+- *iOS integration tests*: All pass.
+ 
