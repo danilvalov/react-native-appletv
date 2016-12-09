@@ -33,15 +33,15 @@ module.exports = yeoman.generators.NamedBase.extend({
       this.destinationPath(path.join('tvos', this.name + 'Tests', 'Info.plist'))
     );
 
-    // SomeApp/tvos/SomeAppTV.xcodeproj
+    // SomeApp/tvos/SomeApp.xcodeproj
     this.fs.copyTpl(
       this.templatePath(path.join('xcodeproj-appletv', 'project.pbxproj')),
-      this.destinationPath(path.join('tvos', this.name + 'TV.xcodeproj', 'project.pbxproj')),
+      this.destinationPath(path.join('tvos', this.name + '.xcodeproj', 'project.pbxproj')),
       templateVars
     );
     this.fs.copyTpl(
       this.templatePath(path.join('xcodeproj-appletv', 'xcshareddata', 'xcschemes', '_xcscheme')),
-      this.destinationPath(path.join('tvos', this.name + 'TV.xcodeproj', 'xcshareddata', 'xcschemes', this.name + 'TV.xcscheme')),
+      this.destinationPath(path.join('tvos', this.name + '.xcodeproj', 'xcshareddata', 'xcschemes', this.name + '.xcscheme')),
       templateVars
     );
   },
