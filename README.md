@@ -47,6 +47,26 @@ Your project will be started on the Apple TV emulator.
 
 Congratulations! You've successfully run and modified your first React Native app.
 
+### How to add react-native iOS library to your tvOS project:
+
+If you need to add custom iOS library:
+
+* Install this library to your project by instructions from this library.
+  For example:
+  ```$xslt
+  npm install react-native-idle-timer --save
+  ```
+
+* Link this library to your project.
+  For example:
+  ```$xslt
+  react-native link react-native-idle-timer
+  ```
+
+* Open your project in Xcode, select the installed library in `Libraries` list and change `Base SDK` option from `iOS` to `tvOS` (or to `Latest tvOS`) like here:
+  ![Test](https://cl.ly/0R3C050m0D0X/Image%202016-12-22%20at%2010.02.20%20%D0%9F%D0%9F.png)
+
+
 # Apple TV changes
 
 This branch includes changes to support building React Native applications on Apple TV.
